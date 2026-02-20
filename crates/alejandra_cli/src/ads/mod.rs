@@ -1,6 +1,8 @@
-use rand::distributions::weighted::WeightedIndex;
-use rand::distributions::Distribution;
-use rand::rngs::OsRng;
+use rand::distr::weighted::WeightedIndex;
+use rand::distr::Distribution;
+use rand::rngs::StdRng;
+use rand::rngs::SysRng;
+use rand::SeedableRng;
 
 pub(crate) fn random_ad() -> String {
     let ads = [
@@ -88,7 +90,9 @@ fn please_star() -> String {
 
 fn random_weighted_choice<T>(choices: &[(f64, T)]) -> &T {
     let weights = choices.iter().map(|(weight, _)| *weight);
-    let index: usize = WeightedIndex::new(weights).unwrap().sample(&mut OsRng);
+    let index: usize = WeightedIndex::new(weights)
+        .unwrap()
+        .sample(&mut StdRng::try_from_rng(&mut SysRng).unwrap());
 
     &choices[index].1
 }
