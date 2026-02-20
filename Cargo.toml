@@ -12,27 +12,30 @@ repository = "https://github.com/kamadorueda/alejandra"
 version = "4.0.0"
 
 [workspace.dependencies]
-clap = { version = "*", default-features = false, features = [
+clap = { version = "4.5.60", features = [
   "color",
   "derive",
   "env",
   "std",
-  "strsim",
+  "usage",
+  "help",
 ] }
-futures = { version = "*", default-features = false, features = [
+futures = { version = "0.3.32", default-features = false, features = [
   "executor",
   "thread-pool",
 ] }
-num_cpus = { version = "*", default-features = false, features = [] }
-rand = { version = "*", default-features = false, features = [
+num_cpus = { version = "1.17.0", default-features = false, features = [] }
+rand = { version = "0.10.0", default-features = false, features = [
   "alloc",
-  "getrandom",
+  "std",
+  "std_rng",
+  "sys_rng",
 ] }
-toml = { version = "*", default-features = false, features = ["parse"] }
-walkdir = { version = "*", default-features = false, features = [] }
-rnix = { version = "*", default-features = false, features = [] }
-rowan = { version = "0.15.16", default-features = false, features = [] }
-serde = { version = "*", default-features = false, features = ["derive"] }
+toml = { version = "1.0.3", default-features = false, features = ["parse", "serde"] }
+walkdir = { version = "2.5.0", default-features = false, features = [] }
+rnix = { version = "0.14.0", default-features = false, features = [] }
+rowan = { version = "0.16.1", default-features = false, features = [] }
+serde = { version = "1.0.228", default-features = false, features = ["derive"] }
 
 [profile.release]
 lto       = true
