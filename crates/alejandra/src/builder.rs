@@ -214,7 +214,16 @@ fn format(
                 }
 
                 // /path/to/${a}
-                rnix::SyntaxKind::NODE_PATH => crate::rules::default,
+                rnix::SyntaxKind::NODE_PATH_ABS => crate::rules::default,
+
+                // ./foo | ../bar
+                rnix::SyntaxKind::NODE_PATH_REL => crate::rules::default,
+
+                // ~/foo
+                rnix::SyntaxKind::NODE_PATH_HOME => crate::rules::default,
+
+                // <nixpkgs>
+                rnix::SyntaxKind::NODE_PATH_SEARCH => crate::rules::default,
 
                 // { NODE_PAT_ENTRY* }
                 rnix::SyntaxKind::NODE_PATTERN => crate::rules::pattern::rule,
