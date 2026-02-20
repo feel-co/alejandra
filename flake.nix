@@ -88,17 +88,27 @@
       mkShell {
         name = "alejandra";
         packages = [
+          # Rust toolchain
+          inputs.fenix.packages."x86_64-linux".latest.rustfmt
+          inputs.fenix.packages."x86_64-linux".stable.toolchain
+
+          # Additional Cargo Tooling
           cargo-bloat
           cargo-license
           cargo-tarpaulin
+          cargo-deny
+          cargo-nextest
+          cargo-machete
+
+          # Other tooling
           jq
-          inputs.fenix.packages."x86_64-linux".latest.rustfmt
-          inputs.fenix.packages."x86_64-linux".stable.toolchain
           perf
-          nodejs
-          nodePackages.prettier
           shfmt
           treefmt
+
+          # Frontend
+          nodejs
+          nodePackages.prettier
           yarn
           yarn2nix
         ];
