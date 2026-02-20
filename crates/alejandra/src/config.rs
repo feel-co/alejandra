@@ -6,7 +6,10 @@ use serde::Deserialize;
 pub struct Config {
     /// Indentation to use
     #[serde(default)]
-    pub indentation: Indentation,
+    pub indentation:           Indentation,
+    /// Add spaces inside `[]` and `{}` when not empty in inline mode
+    #[serde(default)]
+    pub enable_inline_spacing: bool,
 }
 
 #[derive(Clone, Copy, Default, Deserialize)]

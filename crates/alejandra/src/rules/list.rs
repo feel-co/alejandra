@@ -73,7 +73,7 @@ pub(crate) fn rule(
                 steps.push_back(crate::builder::Step::Pad);
                 steps.push_back(crate::builder::Step::FormatWider(child));
             } else {
-                if item_index > 1 {
+                if build_ctx.config.enable_inline_spacing || item_index > 1 {
                     steps.push_back(crate::builder::Step::Whitespace);
                 }
                 steps.push_back(crate::builder::Step::Format(child));
@@ -90,6 +90,8 @@ pub(crate) fn rule(
         steps.push_back(crate::builder::Step::Dedent);
         steps.push_back(crate::builder::Step::NewLine);
         steps.push_back(crate::builder::Step::Pad);
+    } else if items_count > 0 && build_ctx.config.enable_inline_spacing {
+        steps.push_back(crate::builder::Step::Whitespace);
     }
     steps.push_back(crate::builder::Step::Format(child));
 
