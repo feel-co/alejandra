@@ -2,8 +2,11 @@ use std::fs::read_to_string;
 use std::io::Read;
 
 use alejandra::config::Config;
+use clap::builder::styling::AnsiColor;
+use clap::builder::styling::Styles;
 use clap::value_parser;
 use clap::ArgAction;
+use clap::ColorChoice;
 use clap::Parser;
 use futures::future::RemoteHandle;
 use futures::stream::FuturesUnordered;
@@ -12,27 +15,30 @@ use futures::task::SpawnExt;
 use crate::ads::random_ad;
 use crate::verbosity::Verbosity;
 
-/// The Uncompromising Nix Code Formatter.
-#[derive(Debug, Parser)]
-#[clap(
-    name="Alejandra",
+const ALEJANDRA_STYLES: Styles = Styles::styled()
+    .header(AnsiColor::Yellow.on_default())
+    .usage(AnsiColor::Green.on_default())
+    .literal(AnsiColor::Green.on_default())
+    .placeholder(AnsiColor::Cyan.on_default());
 
-    after_help = concat!(
-        "Alejandra will exit with status code:\n",
-        "  1, if any error occurs.\n",
-        "  2, if --check was used and any file requires formatting.\n",
-        "  0, otherwise.",
-    ),
-    term_width = 80,
+/// The Uncompromising Nix Code Formatter.
+#[derive(Parser)]
+#[command(
+    name = "alejandra",
     version,
+    styles = ALEJANDRA_STYLES,
+    color = ColorChoice::Auto,
+    max_term_width = 80,
+    after_help = "Alejandra will exit with status code:\n  1, if any error \
+                  occurs.\n  2, if --check was used and any file requires \
+                  formatting.\n  0, otherwise."
 )]
 struct CLIArgs {
     /// Files or directories, or a single "-" (or leave empty) to format stdin.
-    #[clap(multiple_values = true)]
     include: Vec<String>,
 
     /// Files or directories to exclude from formatting.
-    #[clap(long, short, multiple_occurrences = true)]
+    #[clap(long, short, action = ArgAction::Append)]
     exclude: Vec<String>,
 
     /// Check if the input is already formatted and disable writing in-place
