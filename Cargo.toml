@@ -37,6 +37,7 @@ walkdir = { version = "2.5.0", default-features = false, features = [] }
 rnix = { version = "0.14.0", default-features = false, features = [] }
 rowan = { version = "0.16.1", default-features = false, features = [] }
 serde = { version = "1.0.228", default-features = false, features = ["derive"] }
+criterion = "0.8.2"
 
 [profile.release]
 lto       = true
