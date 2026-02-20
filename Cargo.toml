@@ -1,9 +1,45 @@
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+[workspace.package]
+authors = ["Kevin Amado <kamadorueda@gmail.com>"]
+description = "The Uncompromising Nix Code Formatter"
+edition = "2021"
+license = "Unlicense"
+readme = true
+repository = "https://github.com/kamadorueda/alejandra"
+version = "4.0.0"
+
+[workspace.dependencies]
+clap = { version = "*", default-features = false, features = [
+  "color",
+  "derive",
+  "env",
+  "std",
+  "strsim",
+] }
+futures = { version = "*", default-features = false, features = [
+  "executor",
+  "thread-pool",
+] }
+num_cpus = { version = "*", default-features = false, features = [] }
+rand = { version = "*", default-features = false, features = [
+  "alloc",
+  "getrandom",
+] }
+toml = { version = "*", default-features = false, features = ["parse"] }
+walkdir = { version = "*", default-features = false, features = [] }
+rnix = { version = "*", default-features = false, features = [] }
+rowan = { version = "0.15.16", default-features = false, features = [] }
+serde = { version = "*", default-features = false, features = ["derive"] }
+
 [profile.release]
-lto = true
+lto       = true
+opt-level = "z"
+strip     = true
 
 [profile.dev]
-opt-level = 2
+opt-level = 1
 
-[workspace]
-members = ["src/*"]
-resolver = "2"
+

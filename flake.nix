@@ -2,13 +2,13 @@
   description = "The Uncompromising Nix Code Formatter";
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flakeCompat.url = "github:edolstra/flake-compat";
     flakeCompat.flake = false;
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
   };
 
   outputs = inputs: let
