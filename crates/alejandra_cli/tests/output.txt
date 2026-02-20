@@ -1,42 +1,33 @@
 ===
 args: ["--help"]
 stdout:
-  Alejandra 4.0.0
   The Uncompromising Nix Code Formatter
   
-  USAGE:
-      alejandra [OPTIONS] [INCLUDE]...
+  Usage: alejandra [OPTIONS] [INCLUDE]...
   
-  ARGS:
-      <INCLUDE>...    Files or directories, or a single "-" (or leave empty)
-                      to format stdin
+  Arguments:
+    [INCLUDE]...  Files or directories, or a single "-" (or leave empty) to format
+                  stdin
   
-  OPTIONS:
-      -c, --check
-              Check if the input is already formatted and disable writing in-place
-              the modified content
-  
-      -e, --exclude <EXCLUDE>
-              Files or directories to exclude from formatting
-  
-          --experimental-config <EXPERIMENTAL_CONFIG>
-              [Experimental] Path to a config file. If not provided, it'll default
-              to `alejandra.toml` in the current directory. If not found, it'll
-              use the default style
-  
-      -h, --help
-              Print help information
-  
-      -q, --quiet
-              Use once to hide informational messages, twice to hide error
-              messages
-  
-      -t, --threads <THREADS>
-              Number of formatting threads to spawn. Defaults to the number of
-              physical CPUs [env: ALEJANDRA_THREADS=1]
-  
-      -V, --version
-              Print version information
+  Options:
+    -e, --exclude <EXCLUDE>
+            Files or directories to exclude from formatting
+    -c, --check
+            Check if the input is already formatted and disable writing in-place
+            the modified content
+        --experimental-config <EXPERIMENTAL_CONFIG>
+            [Experimental] Path to a config file. If not provided, it'll default
+            to `alejandra.toml` in the current directory. If not found, it'll use
+            the default style
+    -t, --threads <THREADS>
+            Number of formatting threads to spawn. Defaults to the number of
+            physical CPUs [env: ALEJANDRA_THREADS=1]
+    -q, --quiet...
+            Use once to hide informational messages, twice to hide error messages
+    -h, --help
+            Print help
+    -V, --version
+            Print version
   
   Alejandra will exit with status code:
     1, if any error occurs.
@@ -47,7 +38,7 @@ exit code: Some(0)
 ===
 args: ["--version"]
 stdout:
-  Alejandra 4.0.0
+  alejandra 4.0.0
 
 exit code: Some(0)
 ===
@@ -297,7 +288,7 @@ stderr:
     |
   1 | asdf = "asdf"
     | ^^^^
-  unknown field `asdf`, expected `indentation`
+  unknown field `asdf`, expected `indentation` or `enable_inline_spacing`
   
 
 exit code: Some(1)
