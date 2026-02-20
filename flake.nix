@@ -94,7 +94,7 @@
           jq
           inputs.fenix.packages."x86_64-linux".latest.rustfmt
           inputs.fenix.packages."x86_64-linux".stable.toolchain
-          linuxPackages_latest.perf
+          perf
           nodejs
           nodePackages.prettier
           shfmt
