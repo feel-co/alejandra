@@ -1,10 +1,12 @@
 use std::collections::LinkedList;
 
+#[derive(Clone)]
 pub(crate) enum Trivia {
     Comment(String),
     Newlines,
 }
 
+#[derive(Clone)]
 pub(crate) struct Child {
     pub element: rnix::SyntaxElement,
 
@@ -29,7 +31,7 @@ pub(crate) fn new(
         let mut trivialities = LinkedList::new();
 
         let mut skip_next_newline = false;
-        children.drain_trivia(|element| match element {
+        children.drain_trivia(|el| match el {
             crate::children::Trivia::Comment(text) => {
                 if inline_comment.is_none()
                     && trivialities.is_empty()

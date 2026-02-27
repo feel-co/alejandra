@@ -49,7 +49,6 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 pub(crate) mod builder;
 pub(crate) mod children;
-pub(crate) mod children2;
 /// Configuration options for the formatter
 pub mod config;
 /// Functions for formatting Nix code.
@@ -57,4 +56,5 @@ pub mod format;
 pub(crate) mod parsers;
 pub(crate) mod position;
 pub(crate) mod rules;
+pub(crate) mod trivia;
 pub(crate) mod utils;

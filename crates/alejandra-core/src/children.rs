@@ -40,14 +40,18 @@ impl Children {
                                 simplified.kind(),
                                 rnix::SyntaxKind::NODE_PAREN
                             ) {
-                                let mut children = crate::children2::new(
-                                    build_ctx,
-                                    &simplified,
-                                );
+                                let mut children =
+                                    crate::trivia::new(build_ctx, &simplified);
 
-                                let opener = children.next().unwrap();
-                                let expression = children.next().unwrap();
-                                let closer = children.next().unwrap();
+                                let Some(opener) = children.next() else {
+                                    break;
+                                };
+                                let Some(expression) = children.next() else {
+                                    break;
+                                };
+                                let Some(closer) = children.next() else {
+                                    break;
+                                };
 
                                 if !opener.has_inline_comment
                                     && !opener.has_comments
@@ -66,8 +70,13 @@ impl Children {
                                             | rnix::SyntaxKind::NODE_STRING
                                     )
                                 {
-                                    simplified =
-                                        expression.element.into_node().unwrap();
+                                    if let Some(expr_node) =
+                                        expression.element.into_node()
+                                    {
+                                        simplified = expr_node;
+                                    } else {
+                                        break;
+                                    }
                                 } else {
                                     break;
                                 }
