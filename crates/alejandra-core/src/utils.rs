@@ -1,9 +1,9 @@
 pub(crate) fn has_newlines(string: &str) -> bool {
-    string.chars().any(|c| c == '\n')
+    string.contains('\n')
 }
 
 pub(crate) fn count_newlines(string: &str) -> usize {
-    string.chars().filter(|c| *c == '\n').count()
+    string.matches('\n').count()
 }
 
 pub(crate) fn second_through_penultimate_line_are_indented(
@@ -23,9 +23,11 @@ pub(crate) fn second_through_penultimate_line_are_indented(
         return if_leq_than_two_lines;
     }
 
-    let whitespace = format!("{0:<1$}  ", "", 2 * build_ctx.indentation);
-    let lambda = format!("{0:<1$}}}:", "", 2 * build_ctx.indentation);
-    let in_ = format!("{0:<1$}in", "", 2 * build_ctx.indentation);
+    const INDENT_MULTIPLIER: usize = 2;
+    let indent = INDENT_MULTIPLIER * build_ctx.indentation;
+    let whitespace = format!("{:<1$}  ", "", indent);
+    let lambda = format!("{:<1$}}}:", "", indent);
+    let in_ = format!("{:<1$}in", "", indent);
 
     formatted_lines.iter().skip(1).rev().skip(1).all(|line| {
         line.is_empty()
