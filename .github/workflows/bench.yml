@@ -1,0 +1,28 @@
+name: Benchmark
+
+on:
+  pull_request:
+
+jobs:
+  bench:
+    name: Benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.base_ref }}
+          fetch-depth: 0
+
+      - name: Install Rust
+        uses: dtolnay/rust-action@stable
+
+      - name: Run benchmarks (base)
+        run: cargo bench --bench fmt -- --save-baseline base
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Compare benchmarks
+        run: cargo bench --bench fmt -- --compare base
