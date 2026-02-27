@@ -58,5 +58,3 @@ pub(crate) mod parsers;
 pub(crate) mod position;
 pub(crate) mod rules;
 pub(crate) mod utils;
-/// Metadata.
-pub mod version;
